@@ -8,14 +8,20 @@
  * Usage:
  *   bun run docxology/scripts/verify-installation.ts
  *   bun run docxology/scripts/verify-installation.ts --verbose
+ *   bun run docxology/scripts/verify-installation.ts --test-mode
  */
 
 import { existsSync, readFileSync, statSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 
-const PAI_DIR = process.env.PAI_DIR || join(homedir(), '.claude');
+const TEST_MODE = process.argv.includes('--test-mode');
 const VERBOSE = process.argv.includes('--verbose') || process.argv.includes('-v');
+
+// In test mode, use a temporary directory or provided PAI_DIR
+const PAI_DIR = TEST_MODE
+  ? (process.env.PAI_DIR || join(process.cwd(), 'docxology', 'scripts', 'tests', 'test-pai'))
+  : (process.env.PAI_DIR || join(homedir(), '.claude'));
 
 interface CheckResult {
   name: string;
@@ -47,6 +53,9 @@ function warn(name: string, message: string, details?: string): void {
 }
 
 console.log('\n🔍 PAI Installation Verification\n');
+if (TEST_MODE) {
+  console.log('🧪 TEST MODE - Using test PAI directory\n');
+}
 console.log(`PAI_DIR: ${PAI_DIR}\n`);
 
 // ============================================================================
@@ -91,7 +100,9 @@ if (envExists) {
 }
 
 // Check settings.json
-const settingsPath = join(homedir(), '.claude', 'settings.json');
+const settingsPath = TEST_MODE
+  ? join(PAI_DIR, 'settings.json')
+  : join(homedir(), '.claude', 'settings.json');
 const settingsExists = existsSync(settingsPath);
 check('settings.json', settingsExists, settingsExists ? 'Found' : 'Missing - hooks will not work');
 

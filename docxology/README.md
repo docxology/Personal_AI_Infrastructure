@@ -24,7 +24,7 @@ Think of it as your **operational toolkit** that grows alongside your PAI instal
 | **[scripts/](scripts/)** | Verification and setup tools | `bun run docxology/scripts/setup-health-check.ts` |
 | **[docs/](docs/)** | Usage guides and documentation | Start with [docs/START_HERE.md](docs/START_HERE.md) |
 | **[personal/](personal/)** | Your personal content | See [personal/README.md](personal/README.md) |
-| **[LIFE_PLAN_Q1_2026.md](LIFE_PLAN_Q1_2026.md)** | Quick access life plan | Your Q1-Q2 2026 plan |
+| **[LIFE_PLAN_Q1_2026.md](personal/LIFE_PLAN_Q1_2026.md)** | Quick access life plan | Your Q1-Q2 2026 plan |
 
 ---
 
@@ -172,6 +172,35 @@ As your PAI system evolves, docxology grows with it:
 - **Personal content** goes in `personal/` (organized by topic)
 
 The structure scales naturally as your needs grow.
+
+---
+
+## Testing
+
+All scripts support `--test-mode` for testing with generic sample data that works for any user.
+
+### Quick Test
+
+```bash
+# Run all tests
+bun run docxology/scripts/tests/run-tests.ts
+
+# Validate scripts
+bun run docxology/scripts/tests/validate-all.ts
+
+# Test individual script
+bun run docxology/scripts/setup-health-check.ts --test-mode
+```
+
+### Test Mode
+
+Test mode uses:
+- Generic defaults ("TestUser", "UTC", "TestApp")
+- Isolated test directory (`docxology/scripts/tests/test-pai/`)
+- Test fixtures from `docxology/scripts/tests/fixtures/`
+- No impact on real PAI installation
+
+See [scripts/tests/README.md](scripts/tests/README.md) for complete testing documentation.
 
 ---
 

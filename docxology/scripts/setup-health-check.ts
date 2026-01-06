@@ -7,13 +7,19 @@
  * 
  * Usage:
  *   bun run docxology/scripts/setup-health-check.ts
+ *   bun run docxology/scripts/setup-health-check.ts --test-mode
  */
 
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 
-const PAI_DIR = process.env.PAI_DIR || join(homedir(), '.claude');
+const TEST_MODE = process.argv.includes('--test-mode');
+
+// In test mode, use a temporary directory or provided PAI_DIR
+const PAI_DIR = TEST_MODE
+  ? (process.env.PAI_DIR || join(process.cwd(), 'docxology', 'scripts', 'tests', 'test-pai'))
+  : (process.env.PAI_DIR || join(homedir(), '.claude'));
 
 interface HealthStatus {
   component: string;
@@ -42,6 +48,9 @@ function checkHealth(component: string, condition: boolean, degradedCondition?: 
 }
 
 console.log('\n🏥 PAI Health Check\n');
+if (TEST_MODE) {
+  console.log('🧪 TEST MODE - Using test PAI directory\n');
+}
 
 // Critical components
 checkHealth('PAI Directory', existsSync(PAI_DIR));
@@ -53,7 +62,9 @@ checkHealth('Session Initializer', existsSync(join(PAI_DIR, 'hooks', 'initialize
 checkHealth('Context Loader', existsSync(join(PAI_DIR, 'hooks', 'load-core-context.ts')));
 
 // Configuration
-const settingsPath = join(homedir(), '.claude', 'settings.json');
+const settingsPath = TEST_MODE
+  ? join(PAI_DIR, 'settings.json')
+  : join(homedir(), '.claude', 'settings.json');
 let hasHooks = false;
 if (existsSync(settingsPath)) {
   try {

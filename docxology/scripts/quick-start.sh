@@ -4,27 +4,40 @@
 # Interactive guide to get started with your PAI system
 #
 
+TEST_MODE=false
+if [[ "$*" == *"--test-mode"* ]]; then
+    TEST_MODE=true
+fi
+
 echo ""
 echo "🚀 PAI Quick Start"
+if [ "$TEST_MODE" = true ]; then
+    echo "🧪 TEST MODE - Non-interactive"
+fi
 echo "════════════════════════════════════════════════════════════"
 echo ""
 
-# Check if Claude Code is running
-if pgrep -f "claude" > /dev/null; then
-    echo "⚠️  Claude Code is currently running"
-    echo ""
-    echo "To activate all hooks and features, you need to:"
-    echo "  1. Close Claude Code completely"
-    echo "  2. Restart it"
-    echo ""
-    read -p "Press Enter when you've restarted Claude Code..."
+# Check if Claude Code is running (skip in test mode)
+if [ "$TEST_MODE" = false ]; then
+    if pgrep -f "claude" > /dev/null; then
+        echo "⚠️  Claude Code is currently running"
+        echo ""
+        echo "To activate all hooks and features, you need to:"
+        echo "  1. Close Claude Code completely"
+        echo "  2. Restart it"
+        echo ""
+        read -p "Press Enter when you've restarted Claude Code..."
+    else
+        echo "✓ Claude Code is not running"
+        echo ""
+        echo "Start Claude Code now to activate the PAI system:"
+        echo "  claude"
+        echo ""
+        read -p "Press Enter when Claude Code is started..."
+    fi
 else
-    echo "✓ Claude Code is not running"
+    echo "🧪 TEST MODE: Skipping Claude Code check"
     echo ""
-    echo "Start Claude Code now to activate the PAI system:"
-    echo "  claude"
-    echo ""
-    read -p "Press Enter when Claude Code is started..."
 fi
 
 echo ""
@@ -33,7 +46,11 @@ echo "🧪 Testing Your Installation"
 echo "════════════════════════════════════════════════════════════"
 echo ""
 
-echo "In your new Claude Code session, try these commands:"
+if [ "$TEST_MODE" = true ]; then
+    echo "🧪 TEST MODE: Generic test commands for validation:"
+else
+    echo "In your new Claude Code session, try these commands:"
+fi
 echo ""
 echo "1. Identity Check:"
 echo "   \"Who are you?\""
@@ -53,20 +70,25 @@ echo "📊 Optional: Start Observability Dashboard"
 echo "════════════════════════════════════════════════════════════"
 echo ""
 
-read -p "Start observability dashboard? (y/N) " -n 1 -r
-echo ""
-
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    PAI_DIR="${PAI_DIR:-$HOME/.claude}"
-    if [ -f "$PAI_DIR/observability/manage.sh" ]; then
-        echo "Starting observability server..."
-        cd "$PAI_DIR/observability"
-        ./manage.sh start
-        echo ""
-        echo "✓ Dashboard available at: http://localhost:4000"
-    else
-        echo "⚠️  Observability server not found"
+if [ "$TEST_MODE" = false ]; then
+    read -p "Start observability dashboard? (y/N) " -n 1 -r
+    echo ""
+    
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        PAI_DIR="${PAI_DIR:-$HOME/.claude}"
+        if [ -f "$PAI_DIR/observability/manage.sh" ]; then
+            echo "Starting observability server..."
+            cd "$PAI_DIR/observability"
+            ./manage.sh start
+            echo ""
+            echo "✓ Dashboard available at: http://localhost:4000"
+        else
+            echo "⚠️  Observability server not found"
+        fi
     fi
+else
+    echo "🧪 TEST MODE: Skipping observability dashboard prompt"
+    echo ""
 fi
 
 echo ""
