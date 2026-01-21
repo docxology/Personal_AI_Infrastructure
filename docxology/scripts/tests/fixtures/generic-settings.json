@@ -1,0 +1,74 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/initialize-session.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ],
+    "PreToolUse": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/security-validator.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/load-core-context.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      },
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/update-tab-titles.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ],
+    "PostToolUse": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/capture-all-events.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ],
+    "Stop": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/stop-hook.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ],
+    "SubagentStop": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/subagent-stop-hook.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ],
+    "SessionEnd": [
+      {
+        "command": "bun",
+        "args": ["run", "${PAI_DIR}/hooks/capture-session-summary.ts"],
+        "env": {
+          "PAI_DIR": "${PAI_DIR}"
+        }
+      }
+    ]
+  }
+}

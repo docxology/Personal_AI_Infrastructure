@@ -62,6 +62,12 @@ private/
 secrets/
 credentials/
 
+# Docxology - Personal content (keep samples, exclude private docs)
+docxology/personal/*
+!docxology/personal/README.md
+!docxology/personal/samples/
+docxology/LIFE_PLAN*.md
+
 # PAI Update System (sideloading)
 .claude/pai_updates/
 .claude/pai_backups/
