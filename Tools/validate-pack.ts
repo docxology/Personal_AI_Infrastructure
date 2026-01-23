@@ -9,7 +9,7 @@
  *
  * Usage:
  *   bun run Tools/validate-pack.ts                    # Validate all packs
- *   bun run Tools/validate-pack.ts kai-agents-skill   # Validate specific pack
+ *   bun run Tools/validate-pack.ts pai-agents-skill   # Validate specific pack
  *   bun run Tools/validate-pack.ts --changed-only     # Validate changed packs (for CI)
  */
 
@@ -20,10 +20,10 @@ const PACKS_DIR = join(import.meta.dir, '..', 'Packs');
 
 // Pack type classification
 const SYSTEM_PACKS = [
-  'kai-hook-system',
-  'kai-history-system',
-  'kai-voice-system',
-  'kai-observability-server',
+  'pai-hook-system',
+  'pai-history-system',
+  'pai-voice-system',
+  'pai-observability-server',
   'icons'
 ];
 
@@ -213,7 +213,7 @@ PAI Pack Validator
 
 Usage:
   bun run Tools/validate-pack.ts                    # Validate all packs
-  bun run Tools/validate-pack.ts kai-agents-skill   # Validate specific pack
+  bun run Tools/validate-pack.ts pai-agents-skill   # Validate specific pack
   bun run Tools/validate-pack.ts --changed-only     # Validate changed packs (for CI)
 
 Pack Types:

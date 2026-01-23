@@ -34,7 +34,7 @@ def load_google_credentials_env() -> Dict[str, str]:
         "GOOGLE_OAUTH_CLIENT_ID": creds.get('client_id', ''),
         "GOOGLE_OAUTH_CLIENT_SECRET": creds.get('client_secret', ''),
         "GOOGLE_OAUTH_TOKEN_PATH": token_path,
-        "GOOGLE_OAUTH_REDIRECT_URI": list(creds.get('redirect_uris', ['http://localhost:3001']))[0]
+        "GOOGLE_OAUTH_REDIRECT_URI": list(creds.get('redirect_uris', ['http://localhost:3500/oauth2callback']))[0]
     }
 
 def get_google_credentials_object():

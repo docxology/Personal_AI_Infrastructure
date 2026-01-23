@@ -139,7 +139,7 @@ export function getNotificationConfig(): NotificationConfig {
 // Session Timing
 // ============================================================================
 
-const SESSION_START_FILE = '/tmp/kai-session-start.txt';
+const SESSION_START_FILE = '/tmp/pai-session-start.txt';
 
 /**
  * Record session start time (call from SessionStart hook)

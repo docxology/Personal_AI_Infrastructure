@@ -257,12 +257,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func isLaunchAtLoginEnabled() -> Bool {
         // Check if LaunchAgent plist exists
-        let launchAgentPath = NSHomeDirectory() + "/Library/LaunchAgents/com.kai.observability.plist"
+        let launchAgentPath = NSHomeDirectory() + "/Library/LaunchAgents/com.pai.observability.plist"
         return FileManager.default.fileExists(atPath: launchAgentPath)
     }
 
     private func setLaunchAtLogin(enabled: Bool) {
-        let launchAgentPath = NSHomeDirectory() + "/Library/LaunchAgents/com.kai.observability.plist"
+        let launchAgentPath = NSHomeDirectory() + "/Library/LaunchAgents/com.pai.observability.plist"
         let appPath = Bundle.main.bundlePath
 
         if enabled {
@@ -273,7 +273,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             <plist version="1.0">
             <dict>
                 <key>Label</key>
-                <string>com.kai.observability</string>
+                <string>com.pai.observability</string>
                 <key>ProgramArguments</key>
                 <array>
                     <string>/usr/bin/open</string>

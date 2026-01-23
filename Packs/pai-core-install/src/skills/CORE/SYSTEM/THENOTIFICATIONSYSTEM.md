@@ -229,7 +229,7 @@ Located in `~/.claude/settings.json`:
   "notifications": {
     "ntfy": {
       "enabled": true,
-      "topic": "kai-[random-topic]",
+      "topic": "pai-[random-topic]",
       "server": "ntfy.sh"
     },
     "discord": {
@@ -252,7 +252,7 @@ Located in `~/.claude/settings.json`:
 
 ### ntfy.sh Setup
 
-1. **Generate topic**: `echo "kai-$(openssl rand -hex 8)"`
+1. **Generate topic**: `echo "pai-$(openssl rand -hex 8)"`
 2. **Install app**: iOS App Store or Android Play Store → "ntfy"
 3. **Subscribe**: Add your topic in the app
 4. **Test**: `curl -d "Test" ntfy.sh/your-topic`

@@ -198,7 +198,7 @@ if (existsSync(settingsPath)) {
           }
         } else {
           console.log('⚠ settings.json exists but has no hooks - manual configuration required');
-          console.log('   See: Packs/kai-hook-system/config/settings-hooks.json');
+          console.log('   See: Packs/pai-hook-system/config/settings-hooks.json');
         }
       } else {
         console.log('✗ settings.json has no hooks configured');

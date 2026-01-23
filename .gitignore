@@ -72,3 +72,5 @@ docxology/LIFE_PLAN*.md
 .claude/pai_updates/
 .claude/pai_backups/
 .claude/.pai-sync-history
+*.pyc
+*.pyc

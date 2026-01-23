@@ -107,7 +107,7 @@
             "https://discordapp\\.com/api/webhooks/[0-9]+/[a-zA-Z0-9_-]+",
             "https://hooks\\.slack\\.com/services/T[A-Z0-9]+/B[A-Z0-9]+/[a-zA-Z0-9]+",
             "https://ntfy\\.sh/[a-zA-Z0-9_-]{10,}",
-            "ntfy\\.sh/kai-[a-zA-Z0-9]+",
+            "ntfy\\.sh/pai-[a-zA-Z0-9]+",
             "https://hooks\\.zapier\\.com/hooks/catch/[0-9]+/[a-zA-Z0-9]+",
             "https://maker\\.ifttt\\.com/trigger/[^/]+/with/key/[a-zA-Z0-9_-]+"
           ]

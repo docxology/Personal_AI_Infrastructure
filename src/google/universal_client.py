@@ -1,4 +1,5 @@
 from typing import Any, Optional
+import logging
 from googleapiclient.discovery import build
 from google.utils import get_google_credentials_object
 
@@ -22,7 +23,7 @@ class UniversalGoogleClient:
         try:
             return get_google_credentials_object()
         except Exception as e:
-            print(f"Warning: Failed to load credentials for {self.service_name}: {e}")
+            logging.warning(f"Warning: Failed to load credentials for {self.service_name}: {e}")
             return None
 
     def _build_service(self) -> Any:
@@ -33,9 +34,24 @@ class UniversalGoogleClient:
         try:
             return build(self.service_name, self.version, credentials=self.credentials)
         except Exception as e:
-            print(f"Error building service {self.service_name} ({self.version}): {e}")
+            logging.error(f"Error building service {self.service_name} ({self.version}): {e}")
             return None
             
     def is_ready(self) -> bool:
         """Checks if the service is successfully initialized."""
         return self.service is not None
+
+    def close(self):
+        """Clean up resources. The google-api-python-client doesn't require explicit cleanup,
+        but this method exists for consistency with MCP clients and future resource management."""
+        self.service = None
+        self.credentials = None
+
+    def __enter__(self):
+        """Context manager entry."""
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit with cleanup."""
+        self.close()
+        return False

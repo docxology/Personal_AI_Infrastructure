@@ -4,7 +4,7 @@ This directory contains the Python client implementations for various Google Ser
 
 ## Architecture
 
-All clients inherit from a common `GoogleMCPClient` (in `base_client.py`) which manages the MCP server subprocess and JSON-RPC communication.
+All clients inherit from a common `GoogleMCPClient` (in `base_client.py`) which manages the MCP server subprocess and JSON-RPC communication. For services without MCP support, use `UniversalGoogleClient` for direct REST API access.
 
 ## Available Services
 
@@ -29,3 +29,18 @@ with GoogleCalendarClient() as client:
 with GoogleGmailClient() as client:
     threads = client.list_threads()
 ```
+
+## Testing
+
+```bash
+# Run Google service tests
+pytest tests/google/ -v
+
+# Run specific service test
+pytest tests/google/test_google_gmail.py -v
+```
+
+## Agent Guide
+
+For agent integration patterns, see [AGENTS.md](./AGENTS.md).
+

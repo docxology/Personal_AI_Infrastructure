@@ -3,7 +3,7 @@
 ## Overview
 This directory allows your AI agents to interact with Google Workspace services.
 
-## capabilities
+## Capabilities
 - **Calendar**: Schedule, update, and delete events.
 - **Gmail**: Read emails, search threads, create drafts.
 - **Drive**: List, create, upload, and delete files/folders.
@@ -16,4 +16,4 @@ When adding new features or debugging:
 3. **Run Tests**: Always run `tests/test_google_{service}.py` to verify.
 
 ## Authentication
-All services rely on the shared credentials at `~/.claude/google-calendar/credentials.json` and `token.json` (or strictly the environment variables setup). Ensure these paths are correct.
+All services rely on shared credentials at `~/.claude/google-calendar/` directory including `credentials.json`, `token.json`, and `google_services_token.json`. See `setup_auth.py` for OAuth flow.

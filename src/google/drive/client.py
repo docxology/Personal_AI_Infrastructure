@@ -1,5 +1,6 @@
 from typing import Dict, Any, List, Optional
 import os
+import logging
 from google.base_client import GoogleMCPClient
 from google.utils import get_base_credentials_path, load_google_credentials_env
 
@@ -15,9 +16,9 @@ class GoogleDriveClient(GoogleMCPClient):
         
         env = os.environ.copy()
         try:
-             env.update(load_google_credentials_env())
+            env.update(load_google_credentials_env())
         except Exception as e:
-             print(f"Warning: Failed to load credentials for env: {e}")
+            logging.warning(f"Failed to load credentials for env: {e}")
         
         super().__init__(
             server_command=["npx", "-y", "@dav23/google-mcp", "start"],

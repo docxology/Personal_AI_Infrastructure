@@ -82,7 +82,7 @@ bun run ~/.claude/skills/CORE/Tools/SessionProgress.ts resume <project>
 ### Step 5: Execute Project Init (if exists)
 ```bash
 # Check for project-level init script
-ls kai-init.sh 2>/dev/null && bash kai-init.sh
+ls pai-init.sh 2>/dev/null && bash pai-init.sh
 ```
 
 ### Step 6: Run Baseline Validation

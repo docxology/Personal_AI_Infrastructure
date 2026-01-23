@@ -1,5 +1,5 @@
 {
-  "name": "kai-agents-tools",
+  "name": "pai-agents-tools",
   "version": "1.0.0",
   "description": "Agent composition and management tools for PAI",
   "type": "module",

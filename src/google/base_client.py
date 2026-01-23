@@ -4,6 +4,7 @@ import subprocess
 import threading
 import time
 import sys
+import logging
 from typing import Dict, Any, List, Optional
 
 class GoogleMCPClient:
@@ -34,7 +35,7 @@ class GoogleMCPClient:
         # Force encoding to UTF-8
         self.env["PYTHONIOENCODING"] = "utf-8"
 
-        print(f"Starting MCP server: {' '.join(self.server_command)}")
+        logging.info(f"Starting MCP server: {' '.join(self.server_command)}")
         self.process = subprocess.Popen(
             self.server_command,
             env=self.env,
@@ -76,7 +77,7 @@ class GoogleMCPClient:
                     # Ignore non-JSON output (logs)
                     pass
             except Exception as e:
-                print(f"Error reading stdout: {e}")
+                logging.error(f"Error reading stdout: {e}")
                 break
 
     def _listen_stderr(self):
@@ -86,7 +87,7 @@ class GoogleMCPClient:
                 line = self.process.stderr.readline()
                 if not line:
                     break
-                print(f"MCP LOG: {line.strip()}", file=sys.stderr)
+                logging.warning(f"MCP LOG: {line.strip()}")
             except Exception:
                 break
 
