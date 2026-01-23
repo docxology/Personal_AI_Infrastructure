@@ -677,6 +677,16 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
+## ⭐ Star History
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=danielmiessler/Personal_AI_Infrastructure&type=Date)](https://star-history.com/#danielmiessler/Personal_AI_Infrastructure&Date)
+
+</div>
+
+---
+
 <div align="center">
 
 **Built with ❤️ by [Daniel Miessler](https://danielmiessler.com) and the PAI community**
