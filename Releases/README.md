@@ -8,133 +8,74 @@
 
 ---
 
-<div align="center">
+## What Are Releases?
 
-## Latest Release: v2.4.0
+Releases are **complete `.claude/` directories** ready to drop into your home folder. Each release contains everything you need: skills, hooks, workflows, memory structure, and configuration.
 
-[![PAI v2.4](https://img.shields.io/badge/PAI-v2.4.0-8B5CF6?style=for-the-badge&logo=github)](v2.4/)
+This is the fastest way to get PAI running. Copy the directory, run the wizard, restart Claude Code.
 
-**The Algorithm: A universal problem-solving system**
-
-29 Skills | 15 Hooks | 331 Workflows | ISC Tracking | Euphoric Surprise
-
-[**Get Started with v2.4 →**](v2.4/)
-
-</div>
+> **Note:** The `.claude` directory is hidden by default on macOS/Linux. Use `ls -la` to see it.
 
 ---
 
-This is the PAI releases directory, which deals with a different type of install from PAI Packs or Bundles. 
+## Available Releases
 
- PAI releases are designed to give you a full working state after a very short install wizard by giving you a functional .claude directory. 
+### v2.4.0 — The Algorithm (Current)
 
----
+Our first attempt at a general problem solver built into PAI to pursue Euphoric Surprise.
 
-## Understanding Release Contents
+- 29 Skills, 15 Hooks, 331 Workflows
+- 7-phase problem-solving with ISC tracking
+- Improved installation wizard
+- Voice notifications via ElevenLabs
 
-Each versioned release (e.g., `v2.3/`) contains:
-
-```
-v2.3/
-├── .claude/          # Hidden directory - the complete PAI installation
-├── Packs/            # Individual packs for modular installation
-└── README.md         # This file (version-specific instructions)
-```
-
-> **Note:** The `.claude` directory starts with a period, making it hidden by default on macOS/Linux. Use `ls -la` to see it, or enable "Show hidden files" in your file manager.
+**[Get v2.4 →](v2.4/)**
 
 ---
 
-## Two Installation Methods
+### v2.3.0 — Continuous Learning
 
-PAI offers two ways to install:
+The release that introduced persistent learning and sentiment capture.
 
-### Method 1: Release Install (Complete Installation) ⭐ RECOMMENDED
+- 20 Skills, session continuity
+- Implicit/explicit rating capture
+- Memory system with WORK, STATE, LEARNING directories
 
-**Best for:** First-time users, fresh setups, or when you want the full PAI experience immediately.
+**[Get v2.3 →](v2.3/)**
 
-> [!TIP]
-> This is the **fastest path to a working PAI system**. You get a complete, pre-configured `.claude/` directory.
+---
 
-**Step-by-step:**
+## Installation
 
 ```bash
-# 1. Clone the repo (if you haven't already)
+# 1. Clone the repo
 git clone https://github.com/danielmiessler/PAI.git
 cd PAI/Releases/v2.4
 
-# 2. Back up your existing Claude Code configuration (if any)
+# 2. Back up existing installation (if any)
 [ -d ~/.claude ] && mv ~/.claude ~/.claude-backup-$(date +%Y%m%d)
 
-# 3. Copy the complete PAI installation to your home directory
+# 3. Copy the release
 cp -r .claude ~/
 
-# 4. Run the configuration wizard
+# 4. Run the wizard
 cd ~/.claude && bun run PAIInstallWizard.ts
 
-# 5. Restart Claude Code to activate hooks
+# 5. Restart Claude Code
 ```
 
-**The wizard will ask for:**
-- Your name (for personalization)
-- Your DA's name (default: Kai)
-- Your timezone (for date/time awareness)
-- Voice preferences (optional, requires ElevenLabs API key)
-
-**Shell support:** The wizard works with both **zsh** and **bash**. It auto-detects your shell and writes environment variables to the correct config file (`.zshrc` or `.bashrc`).
-
-**Result:** Complete PAI installation with all skills, hooks, memory system, and default configuration.
-
-**After installation:** If you have existing AI context (from ChatGPT, previous Claude conversations, etc.), use your new PAI system to help organize that content into the appropriate directories (MEMORY/, USER/, skills/).
+The wizard asks for your name, AI name, timezone, and optional voice preferences.
 
 ---
-
-### Method 2: Pack Install (Modular Installation)
-
-**Best for:** Users who already have a PAI or other agent harness system set up, want selective installation, or prefer AI-guided setup.
-
-**What happens:**
-1. Your existing AI assistant (Claude Code, Cursor, etc.) reads the pack's INSTALL.md
-2. The AI guides you through an interactive installation wizard
-3. Packs install intelligently based on what you already have
-4. Dependencies are checked and installed in the correct order
-
-**How to do it:**
-1. Open your AI coding assistant
-2. Point it to a pack directory: "Install the pack at `/path/to/packs/pai-core-install`"
-3. Follow the interactive prompts
-4. Repeat for each pack you want
-
-**Result:** Modular PAI installation with just the components you need.
 
 ## Troubleshooting
 
-### "I can't see the .claude directory"
+**Can't see .claude directory?** It's hidden. Use `ls -la ~/` or press `Cmd+Shift+.` in Finder.
 
-It's hidden. Use:
-```bash
-ls -la ~/ | grep claude
-```
-
-Or show hidden files in Finder: `Cmd + Shift + .`
-
-### "Hooks aren't firing"
-
-Restart Claude Code after installation. Hooks load at session start.
-
-### "Pack says missing dependency"
-
-Install packs in order. `pai-hook-system` first, then `pai-core-install`, then others.
+**Hooks not firing?** Restart Claude Code after installation.
 
 ---
 
-## Version History
+**Looking for modular installation?** See [Packs](../Packs/) for individual components.
 
-| Version | Date | Notes |
-|---------|------|-------|
-| v2.4 | 2026-01 | Current release - The Algorithm |
-| v2.3 | 2026-01 | Continuous learning, sentiment capture |
-
----
-
-**Questions?** See the main [PAI README](../README.md) or [INSTALL.md](../INSTALL.md).
+**Questions?** See the main [PAI README](../README.md).
