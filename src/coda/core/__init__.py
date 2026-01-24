@@ -1,15 +1,21 @@
 """
 Coda Core Module
 
-Contains base client infrastructure and utilities.
+Contains base client infrastructure, errors, and utilities.
 """
 
-from coda.base_client import CodaClient, CodaAPIError, CodaRateLimitError
-from coda.utils import get_coda_token, get_coda_token_path, save_coda_token, extract_doc_id_from_url
+from coda.core.base_client import CodaClient
+from coda.core.errors import CodaAPIError, CodaRateLimitError
+from coda.core.utils import (
+    get_coda_token,
+    get_coda_token_path,
+    save_coda_token,
+    extract_doc_id_from_url,
+)
 
 __all__ = [
     "CodaClient",
-    "CodaAPIError", 
+    "CodaAPIError",
     "CodaRateLimitError",
     "get_coda_token",
     "get_coda_token_path",

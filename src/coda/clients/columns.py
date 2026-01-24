@@ -5,7 +5,7 @@ Column operations for tables.
 """
 
 from typing import Dict, Any, List, Optional
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 class CodaColumnsClient(CodaClient):

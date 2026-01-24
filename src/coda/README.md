@@ -1,173 +1,75 @@
 # Coda.io API Client
 
-A comprehensive Python client for the [Coda.io REST API v1.5.0](https://coda.io/developers/apis/v1).
+A modular REST API client for Coda.io v1.5.0 with local-first Shadow Sync.
 
-## Features
+## Structure
 
-- **Bearer Token Authentication** - Secure API token management
-- **Automatic Pagination** - Iterator and collection methods for paginated endpoints
-- **Rate Limit Handling** - Automatic retry with exponential backoff on HTTP 429
-- **Full API Coverage** - 50+ methods across 12 specialized modules
-
-## Installation
-
-The client uses only Python standard library (`urllib`, `json`). No additional dependencies required.
-
-## Configuration
-
-### API Token Setup
-
-1. Go to [Coda Account Settings](https://coda.io/account) → API settings
-2. Generate an API token
-3. Save it in one of these locations:
-
-**Option A: Environment Variable**
-```bash
-export CODA_API_TOKEN="your_token_here"
 ```
-
-**Option B: Token File**
-```bash
-mkdir -p ~/.claude/coda
-echo '{"token": "your_token_here"}' > ~/.claude/coda/token.json
-chmod 600 ~/.claude/coda/token.json
+coda/
+├── core/           # Infrastructure
+│   ├── base_client.py   # REST client with auth/pagination
+│   ├── errors.py        # CodaAPIError, CodaRateLimitError
+│   └── utils.py         # Token management
+├── clients/        # Specialized API clients (13 total)
+│   ├── docs.py, pages.py, tables.py, columns.py, rows.py
+│   ├── formulas.py, controls.py, permissions.py
+│   ├── publishing.py, automations.py, account.py
+│   ├── analytics.py, misc.py
+├── shadow/         # Local-first discovery layer
+│   ├── shadow_config.py  # Configuration
+│   ├── shadow_sync.py    # Sync engine
+│   ├── shadow_index.py   # In-memory index
+│   └── shadow_search.py  # Grep-based search
+└── __init__.py     # Package exports
 ```
 
 ## Quick Start
 
-```python
-from coda import CodaClient
-
-# Initialize client (auto-loads token)
-client = CodaClient()
-
-# Verify connection
-user = client.whoami()
-print(f"Connected as: {user['name']}")
-
-# List your docs
-docs = client.list_docs(is_owner=True)
-for doc in docs:
-    print(f"- {doc['name']} ({doc['id']})")
-```
-
-## Usage Examples
-
-### Working with Docs
+### API Client Usage
 
 ```python
-from coda import CodaDocsClient
+from coda import CodaRowsClient, CodaPermissionsClient
 
-client = CodaDocsClient()
-
-# Create a new doc
-doc = client.create_doc(title="My New Doc")
-print(f"Created: {doc['id']}")
-
-# Search docs
-results = client.search_docs("project tracker")
-
-# Get doc info
-info = client.get_doc("AbCDeFGH")
-print(f"Rows: {info['docSize']['totalRowCount']}")
-```
-
-### Working with Tables and Rows
-
-```python
-from coda import CodaRowsClient
-
+# Row operations
 client = CodaRowsClient()
-doc_id = "AbCDeFGH"
-table_id = "grid-pqRst-U"
+rows = client.list_rows(doc_id="NDxZHneeIw", table_id_or_name="Tasks")
 
-# List rows
-rows = client.list_rows(doc_id, table_id)
-
-# Insert a row
-result = client.insert_row(doc_id, table_id, {
-    "c-name": "John Doe",
-    "c-email": "john@example.com",
-    "c-status": "Active"
-})
-
-# Query rows
-active_users = client.query_rows(doc_id, table_id, "c-status", "Active")
-
-# Update a row
-client.update_row(doc_id, table_id, "i-rowId", {"c-status": "Inactive"})
+# Permissions
+perms = CodaPermissionsClient()
+perms.share_with_user(doc_id, email="user@example.com")
 ```
 
-### Sharing and Permissions
+### Shadow Sync Usage
 
 ```python
-from coda import CodaPermissionsClient
+from pathlib import Path
+from coda.shadow import ShadowConfig, ShadowSync, shadow_search
 
-client = CodaPermissionsClient()
+# Sync Coda docs to local shadows
+config = ShadowConfig(
+    shadow_dir=Path("/tmp/shadows"),
+    doc_ids=["NDxZHneeIw"]
+)
+ShadowSync(config).run()
 
-# Share with a user
-client.share_with_user(doc_id, "colleague@company.com", access="write")
-
-# List permissions
-perms = client.list_permissions(doc_id)
+# Fast local search (~50ms)
+results = shadow_search(config.shadow_dir, "infrastructure")
+for r in results:
+    print(f"{r.page_name}: {r.browser_link}")
 ```
 
-### Triggering Automations
+## Authentication
 
-```python
-from coda import CodaAutomationsClient
+Token loaded from `CODA_API_TOKEN` env variable or `~/.claude/coda/token.json`.
 
-client = CodaAutomationsClient()
+## Testing
 
-# Trigger a webhook automation
-client.trigger_automation(doc_id, "grid-auto-ruleId", {
-    "message": "Hello from API!"
-})
+```bash
+pytest tests/coda/ -v
 ```
 
-## Available Clients
+## Related
 
-| Client | Description |
-|--------|-------------|
-| `CodaClient` | Base client with core doc operations |
-| `CodaDocsClient` | Document management |
-| `CodaPagesClient` | Page operations and export |
-| `CodaTablesClient` | Table/view listing |
-| `CodaColumnsClient` | Column metadata |
-| `CodaRowsClient` | Row CRUD and querying |
-| `CodaFormulasClient` | Named formulas |
-| `CodaControlsClient` | UI controls |
-| `CodaPermissionsClient` | Sharing and ACLs |
-| `CodaPublishingClient` | Publishing to gallery |
-| `CodaAutomationsClient` | Webhook triggers |
-| `CodaAccountClient` | User info |
-| `CodaAnalyticsClient` | Analytics data |
-| `CodaMiscClient` | URL resolution, mutation status |
-
-## Rate Limits
-
-The client automatically handles rate limiting. Current Coda limits:
-
-- **Reading**: 100 requests per 6 seconds
-- **Writing**: 10 requests per 6 seconds  
-- **Content writes**: 5 requests per 10 seconds
-- **Listing docs**: 4 requests per 6 seconds
-
-## Error Handling
-
-```python
-from coda.base_client import CodaAPIError, CodaRateLimitError
-
-try:
-    doc = client.get_doc("invalid-id")
-except CodaAPIError as e:
-    print(f"API Error {e.status_code}: {e}")
-except CodaRateLimitError:
-    print("Rate limited - retry later")
-```
-
-## Links
-
-- [Coda API Documentation](https://coda.io/developers/apis/v1)
-- [Generate API Token](https://coda.io/account)
-- [OpenAPI Spec (YAML)](https://coda.io/apis/v1/openapi.yaml)
+- [AGENTS.md](./AGENTS.md) - Agent integration guide
+- [PAI.md](./PAI.md) - PAI integration context
+- [shadow/README.md](./shadow/README.md) - Shadow Sync details

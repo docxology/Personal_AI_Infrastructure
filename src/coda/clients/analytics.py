@@ -5,7 +5,7 @@ Doc and Pack analytics operations.
 """
 
 from typing import Dict, Any, List, Optional, Literal
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 AnalyticsScale = Literal["daily", "cumulative"]

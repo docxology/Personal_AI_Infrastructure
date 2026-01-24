@@ -5,7 +5,7 @@ ACL and sharing operations.
 """
 
 from typing import Dict, Any, List, Optional, Literal
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 AccessType = Literal["readonly", "write", "comment"]

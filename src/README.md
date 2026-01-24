@@ -22,6 +22,7 @@ The `google/` directory contains 90+ service subdirectories, each with:
 - `client.py` - Service-specific client implementation
 - `README.md` - Human documentation
 - `AGENTS.md` - Agent integration guide
+- `PAI.md` - PAI integration context
 
 Key files:
 - `base_client.py` - Base class for MCP communication
@@ -40,7 +41,7 @@ The `coda/` directory provides:
 ```python
 from src.google.gmail.client import GmailClient
 from src.google.calendar.client import CalendarClient
-from src.coda.client import CodaClient
+from src.coda import CodaClient
 
 # Clients handle authentication automatically via MCP
 gmail = GmailClient()
@@ -56,4 +57,9 @@ pytest tests/coda/      # Coda client tests
 
 ---
 
-*Part of [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/PAI)*
+*Part of [PAI (Personal AI Infrastructure)](../README.md)*
+
+## Related Files
+
+- [AGENTS.md](./AGENTS.md) - Agent integration guide
+- [PAI.md](./PAI.md) - PAI integration context

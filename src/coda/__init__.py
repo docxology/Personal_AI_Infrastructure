@@ -2,25 +2,60 @@
 Coda.io API Client Package
 
 A comprehensive REST API client for Coda.io v1.5.0.
+
+Structure:
+- coda.core: Base client, errors, and utilities
+- coda.clients: Specialized API clients
+- coda.shadow: Local-first discovery layer
 """
 
-from coda.base_client import CodaClient
-from coda.docs import CodaDocsClient
-from coda.pages import CodaPagesClient
-from coda.tables import CodaTablesClient
-from coda.columns import CodaColumnsClient
-from coda.rows import CodaRowsClient
-from coda.formulas import CodaFormulasClient
-from coda.controls import CodaControlsClient
-from coda.permissions import CodaPermissionsClient
-from coda.publishing import CodaPublishingClient
-from coda.automations import CodaAutomationsClient
-from coda.account import CodaAccountClient
-from coda.analytics import CodaAnalyticsClient
-from coda.misc import CodaMiscClient
+# Core exports
+from coda.core import (
+    CodaClient,
+    CodaAPIError,
+    CodaRateLimitError,
+    get_coda_token,
+    get_coda_token_path,
+    save_coda_token,
+    extract_doc_id_from_url,
+)
+
+# Client exports
+from coda.clients import (
+    CodaDocsClient,
+    CodaPagesClient,
+    CodaTablesClient,
+    CodaColumnsClient,
+    CodaRowsClient,
+    CodaFormulasClient,
+    CodaControlsClient,
+    CodaPermissionsClient,
+    CodaPublishingClient,
+    CodaAutomationsClient,
+    CodaAccountClient,
+    CodaAnalyticsClient,
+    CodaMiscClient,
+)
+
+# Shadow module exports
+from coda.shadow import (
+    ShadowConfig,
+    ShadowSync,
+    ShadowIndex,
+    shadow_search,
+    ShadowSearchResult,
+)
 
 __all__ = [
+    # Core
     "CodaClient",
+    "CodaAPIError",
+    "CodaRateLimitError",
+    "get_coda_token",
+    "get_coda_token_path",
+    "save_coda_token",
+    "extract_doc_id_from_url",
+    # Clients
     "CodaDocsClient",
     "CodaPagesClient",
     "CodaTablesClient",
@@ -34,6 +69,12 @@ __all__ = [
     "CodaAccountClient",
     "CodaAnalyticsClient",
     "CodaMiscClient",
+    # Shadow
+    "ShadowConfig",
+    "ShadowSync",
+    "ShadowIndex",
+    "shadow_search",
+    "ShadowSearchResult",
 ]
 
-__version__ = "1.0.0"
+__version__ = "2.1.0"

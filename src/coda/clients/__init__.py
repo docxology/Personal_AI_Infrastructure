@@ -4,19 +4,19 @@ Coda Clients Module
 Contains all specialized API client classes.
 """
 
-from coda.docs import CodaDocsClient
-from coda.pages import CodaPagesClient
-from coda.tables import CodaTablesClient
-from coda.columns import CodaColumnsClient
-from coda.rows import CodaRowsClient
-from coda.formulas import CodaFormulasClient
-from coda.controls import CodaControlsClient
-from coda.permissions import CodaPermissionsClient
-from coda.publishing import CodaPublishingClient
-from coda.automations import CodaAutomationsClient
-from coda.account import CodaAccountClient
-from coda.analytics import CodaAnalyticsClient
-from coda.misc import CodaMiscClient
+from coda.clients.docs import CodaDocsClient
+from coda.clients.pages import CodaPagesClient
+from coda.clients.tables import CodaTablesClient
+from coda.clients.columns import CodaColumnsClient
+from coda.clients.rows import CodaRowsClient
+from coda.clients.formulas import CodaFormulasClient
+from coda.clients.controls import CodaControlsClient
+from coda.clients.permissions import CodaPermissionsClient
+from coda.clients.publishing import CodaPublishingClient
+from coda.clients.automations import CodaAutomationsClient
+from coda.clients.account import CodaAccountClient
+from coda.clients.analytics import CodaAnalyticsClient
+from coda.clients.misc import CodaMiscClient
 
 __all__ = [
     "CodaDocsClient",

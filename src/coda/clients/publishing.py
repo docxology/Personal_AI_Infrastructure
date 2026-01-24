@@ -5,7 +5,7 @@ Doc publishing and categories.
 """
 
 from typing import Dict, Any, List, Optional, Literal
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 PublishMode = Literal["view", "play", "edit"]

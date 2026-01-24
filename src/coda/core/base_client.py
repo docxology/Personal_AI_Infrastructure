@@ -7,28 +7,15 @@ REST client with Bearer authentication, pagination, and rate limiting.
 import json
 import time
 import logging
-from typing import Dict, Any, List, Optional, Iterator
+from typing import Any, Dict, List, Optional, Iterator
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 
-from coda.utils import get_coda_token
+from coda.core.utils import get_coda_token
+from coda.core.errors import CodaAPIError, CodaRateLimitError
 
 logger = logging.getLogger(__name__)
-
-
-class CodaAPIError(Exception):
-    """Exception raised for Coda API errors."""
-    
-    def __init__(self, message: str, status_code: int = None, response: Dict = None):
-        self.status_code = status_code
-        self.response = response
-        super().__init__(message)
-
-
-class CodaRateLimitError(CodaAPIError):
-    """Exception raised when rate limited (HTTP 429)."""
-    pass
 
 
 class CodaClient:

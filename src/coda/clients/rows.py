@@ -5,7 +5,7 @@ Row CRUD operations for tables.
 """
 
 from typing import Dict, Any, List, Optional, Union
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 class CodaRowsClient(CodaClient):

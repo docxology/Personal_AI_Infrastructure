@@ -5,7 +5,7 @@ Webhook automation triggers.
 """
 
 from typing import Dict, Any, Optional
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 class CodaAutomationsClient(CodaClient):

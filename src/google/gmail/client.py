@@ -1,7 +1,19 @@
 from typing import Dict, Any, List, Optional
 import os
+import base64
 import logging
 from google.base_client import GoogleMCPClient
+
+
+def encode_subject(subject: str) -> str:
+    """
+    Encode email subject for MIME compatibility per RFC 2047.
+    Non-ASCII subjects (like emoji) are base64-encoded with UTF-8.
+    """
+    if subject.isascii():
+        return subject
+    encoded = base64.b64encode(subject.encode('utf-8')).decode('ascii')
+    return f'=?UTF-8?B?{encoded}?='
 from google.utils import get_base_credentials_path, get_base_token_path, load_google_credentials_env
 
 class GoogleGmailClient(GoogleMCPClient):
@@ -96,18 +108,20 @@ class GoogleGmailClient(GoogleMCPClient):
                      is_html: bool = False) -> Dict[str, Any]:
         """
         Create a draft email.
-        
+
         Args:
             to: Recipient email
-            subject: Email subject
+            subject: Email subject (emoji/unicode supported)
             body: Email body
             cc: CC recipients
             bcc: BCC recipients
             is_html: True if body contains HTML
         """
+        # Encode subject for MIME compatibility (handles emoji/unicode)
+        encoded_subject = encode_subject(subject)
         args = {
-            "to": [to], 
-            "subject": subject,
+            "to": [to],
+            "subject": encoded_subject,
             "body": body,
             "isHtml": is_html
         }
@@ -117,26 +131,28 @@ class GoogleGmailClient(GoogleMCPClient):
             args["bcc"] = bcc
         return self.call_tool("google_gmail_draft_email", args)
 
-    def send_email(self, to: str, subject: str, body: str, 
-                   cc: Optional[List[str]] = None, 
-                   bcc: Optional[List[str]] = None, 
-                   is_html: bool = False, 
+    def send_email(self, to: str, subject: str, body: str,
+                   cc: Optional[List[str]] = None,
+                   bcc: Optional[List[str]] = None,
+                   is_html: bool = False,
                    attachments: Optional[List[Dict[str, Any]]] = None) -> Dict[str, Any]:
         """
         Send a new email.
-        
+
         Args:
             to: Recipient email
-            subject: Email subject
+            subject: Email subject (emoji/unicode supported)
             body: Email body (plain text or HTML)
             cc: CC recipients list
             bcc: BCC recipients list
             is_html: True if body contains HTML
             attachments: List of attachment dicts with 'filename' and 'content' keys
         """
+        # Encode subject for MIME compatibility (handles emoji/unicode)
+        encoded_subject = encode_subject(subject)
         args = {
             "to": [to],
-            "subject": subject,
+            "subject": encoded_subject,
             "body": body,
             "isHtml": is_html
         }

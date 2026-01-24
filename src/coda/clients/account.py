@@ -5,7 +5,7 @@ User account information.
 """
 
 from typing import Dict, Any
-from coda.base_client import CodaClient
+from coda.core.base_client import CodaClient
 
 
 class CodaAccountClient(CodaClient):
