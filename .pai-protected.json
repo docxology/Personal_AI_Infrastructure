@@ -360,7 +360,20 @@
         "Releases/*/.claude/VoiceServer/macos-service/*/*.sh",
         "Releases/*/.claude/hooks/lib/*.ts",
         "Releases/*/.claude/skills/CORE/SYSTEM/UPDATES/*.md",
-        "Releases/*/.claude/skills/CORE/USER/TERMINAL/*.conf"
+        "Releases/*/.claude/skills/CORE/USER/TERMINAL/*.conf",
+        "Releases/*/.claude/skills/CORE/SYSTEM/PAISECURITYSYSTEM/*.yaml",
+        "Releases/*/.claude/skills/Fabric/Patterns/*/*.md",
+        "Releases/*/.claude/skills/Fabric/Patterns/*/system.md",
+        "Releases/*/.claude/skills/Fabric/Patterns/*/README.md",
+        "Releases/*/.claude/skills/WebAssessment/**/*.md",
+        "Releases/*/.claude/skills/WebAssessment/**/*.py",
+        "Releases/*/.claude/skills/WebAssessment/Workflows/**/*.md",
+        "Releases/*/.claude/skills/WebAssessment/OsintTools/*.md",
+        "Releases/*/.claude/skills/WebAssessment/OsintTools/*.py",
+        "Releases/*/.claude/skills/WebAssessment/FfufResources/*.md",
+        "Releases/*/.claude/skills/PromptInjection/*.md",
+        "Releases/*/.claude/skills/Documents/Pdf/*.md",
+        "Releases/*/.claude/skills/WebAssessment/*.py"
       ],
       "exception_contexts": {
         "description": "Patterns that are OK when in documentation/example context",

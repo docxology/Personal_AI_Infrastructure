@@ -197,7 +197,7 @@ cd PAI/Releases/v2.3
 cp -r .claude ~/
 
 # Run the configuration wizard
-cd ~/.claude && bun run install.ts --setup
+cd ~/.claude && bun run PAIInstallWizard.ts
 ```
 
 The wizard will ask for your name, DA name, timezone, and voice preferences. After completion, restart Claude Code to activate hooks.

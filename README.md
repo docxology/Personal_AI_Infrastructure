@@ -58,9 +58,9 @@
 </div>
 
 > [!IMPORTANT]
-> **PAI v2.3.0 Released** — Complete `.claude/` directories with continuous learning are back.
+> **PAI v2.4.0 Released** — The Algorithm: A universal problem-solving system with ISC tracking and Euphoric Surprise.
 >
-> **[Release notes →](Releases/v2.3/README.md)** | **[GitHub Release →](https://github.com/danielmiessler/PAI/releases/tag/v2.3.0)**
+> **[Release notes →](Releases/v2.4/README.md)** | **[GitHub Release →](https://github.com/danielmiessler/PAI/releases/tag/v2.4.0)**
 
 <div align="center">
 
@@ -360,7 +360,7 @@ Rich tab titles and pane management. Dynamic status lines show learning signals,
 ```bash
 # Clone the repo
 git clone https://github.com/danielmiessler/PAI.git
-cd PAI/Releases/v2.3
+cd PAI/Releases/v2.4
 
 # Back up your existing Claude Code configuration (if any)
 [ -d ~/.claude ] && mv ~/.claude ~/.claude-backup-$(date +%Y%m%d)
@@ -369,7 +369,7 @@ cd PAI/Releases/v2.3
 cp -r .claude ~/
 
 # Run the configuration wizard
-cd ~/.claude && bun run install.ts --setup
+cd ~/.claude && bun run PAIInstallWizard.ts
 ```
 
 **The wizard will:**
@@ -380,7 +380,7 @@ cd ~/.claude && bun run install.ts --setup
 
 **After installation:** Restart Claude Code to activate hooks.
 
-[**Full Release documentation →**](Releases/v2.3/README.md)
+[**Full Release documentation →**](Releases/v2.4/README.md)
 
 ---
 
@@ -650,6 +650,13 @@ MIT License - see [LICENSE](LICENSE) for details.
 <summary><strong>📜 Update History</strong></summary>
 
 <br/>
+
+**v2.4.0 (2026-01-23) — The Algorithm**
+- Universal problem-solving system with ISC (Ideal State Criteria) tracking
+- 29 skills, 15 hooks, 331 workflows
+- Euphoric Surprise as the outcome metric
+- Enhanced security with AllowList enforcement
+- [Release Notes](Releases/v2.4/README.md)
 
 **v2.3.0 (2026-01-15) — Full Releases Return**
 - Complete `.claude/` directory releases with continuous learning

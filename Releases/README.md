@@ -10,15 +10,15 @@
 
 <div align="center">
 
-## Latest Release: v2.3.0
+## Latest Release: v2.4.0
 
-[![PAI v2.3](https://img.shields.io/badge/PAI-v2.3.0-8B5CF6?style=for-the-badge&logo=github)](v2.3/)
+[![PAI v2.4](https://img.shields.io/badge/PAI-v2.4.0-8B5CF6?style=for-the-badge&logo=github)](v2.4/)
 
-**Complete `.claude/` directory with continuous learning built in**
+**The Algorithm: A universal problem-solving system**
 
-20 Skills | 11 Agents | 14 Hooks | Sentiment Capture | Memory System
+29 Skills | 15 Hooks | 331 Workflows | ISC Tracking | Euphoric Surprise
 
-[**Get Started with v2.3 →**](v2.3/)
+[**Get Started with v2.4 →**](v2.4/)
 
 </div>
 
@@ -61,7 +61,7 @@ PAI offers two ways to install:
 ```bash
 # 1. Clone the repo (if you haven't already)
 git clone https://github.com/danielmiessler/PAI.git
-cd PAI/Releases/v2.3
+cd PAI/Releases/v2.4
 
 # 2. Back up your existing Claude Code configuration (if any)
 [ -d ~/.claude ] && mv ~/.claude ~/.claude-backup-$(date +%Y%m%d)
@@ -70,7 +70,7 @@ cd PAI/Releases/v2.3
 cp -r .claude ~/
 
 # 4. Run the configuration wizard
-cd ~/.claude && bun run install.ts --setup
+cd ~/.claude && bun run PAIInstallWizard.ts
 
 # 5. Restart Claude Code to activate hooks
 ```
@@ -132,7 +132,8 @@ Install packs in order. `pai-hook-system` first, then `pai-core-install`, then o
 
 | Version | Date | Notes |
 |---------|------|-------|
-| v2.3 | 2026-01 | Current release |
+| v2.4 | 2026-01 | Current release - The Algorithm |
+| v2.3 | 2026-01 | Continuous learning, sentiment capture |
 
 ---
 
